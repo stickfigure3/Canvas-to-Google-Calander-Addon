@@ -1,1 +1,1 @@
-Akash and Adam created to this wonderful application (+ Keshav)
+Akash and Adam created this wonderful application
