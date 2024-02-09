@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "AAK Calendars",
+    "description": "Transfer agenda from Canvas to Google Calendars.",
+    "version": "1.0",
+    "action": {
+      "default_popup": "app.html",
+      "default_icon": "adam.png"
+    }
+  }
