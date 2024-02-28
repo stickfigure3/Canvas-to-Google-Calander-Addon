@@ -1,5 +1,68 @@
+<!DOCTYPE html>
 <html>
-  <body>
-    <h1>Calendar Transfer</h1>
-  </body>
+<head>
+    <title>Extension Example</title>
+    <!-- You can add CSS here or in an external stylesheet to style your page -->
+    <style>
+        #calendar, #canvas-login {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>My Extension</h2>
+
+<!-- Button to execute an API call -->
+<button id="apiCallButton">Execute API Call</button>
+
+<!-- Placeholder for Google Calendar -->
+<div id="calendar">
+    <h3>Google Calendar</h3>
+    <!-- Embed Google Calendar here -->
+    <!-- You'll need to replace 'src' with your actual Google Calendar embed link -->
+    <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+</div>
+
+<!-- Placeholder for Canvas login -->
+<div id="canvas-login">
+    <h3>Canvas Login</h3>
+    <!-- Canvas login form or embed -->
+    <!-- This is just a placeholder; you'll need to customize it according to Canvas's integration options -->
+    <form action="your_canvas_login_endpoint" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript for executing an API call
+    document.getElementById('apiCallButton').addEventListener('click', function() {
+        // Example API call
+        // Replace URL and options as necessary for your use case
+        fetch('your_api_endpoint', {
+            method: 'GET', // or 'POST'
+            headers: {
+                'Content-Type': 'application/json',
+                // Add additional headers here
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Process your API response here
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle any errors here
+        });
+    });
+</script>
+
+</body>
 </html>
