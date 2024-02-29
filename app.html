@@ -10,6 +10,8 @@
             padding: 10px;
         }
     </style>
+    <!-- Load the Google Platform Library -->
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
 
@@ -20,24 +22,48 @@
 
 <!-- Placeholder for Google Calendar -->
 <div id="calendar">
-    const client = google.accounts.oauth2.initCodeClient({
-  client_id: 'YOUR_GOOGLE_CLIENT_ID',
-  scope: 'https://www.googleapis.com/auth/calendar.readonly',
-  ux_mode: 'popup',
-  callback: (response) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', code_receiver_uri, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // Set custom header for CRSF
-    xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
-    xhr.onload = function() {
-      console.log('Auth code response: ' + xhr.responseText);
-    };
-    xhr.send('code=' + response.code);
-  },
-});
+    <h3>Google Calendar</h3>
+    <!-- Placeholder where the Google Calendar will be displayed -->
 </div>
 
+<script>
+    // Placeholder for your code receiver URI
+    const code_receiver_uri = 'YOUR_CODE_RECEIVER_URI';
+
+    // Function to initialize Google OAuth2 client
+    function initGoogleAuth() {
+        const client = google.accounts.oauth2.initCodeClient({
+            client_id: 'YOUR_GOOGLE_CLIENT_ID',
+            scope: 'https://www.googleapis.com/auth/calendar.readonly',
+            ux_mode: 'popup',
+            callback: (response) => {
+                // Handle the response from Google after authentication
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', code_receiver_uri, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                // Set custom header for CRSF
+                xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+                xhr.onload = function() {
+                    console.log('Auth code response: ' + xhr.responseText);
+                    // Here you would typically use the auth response to fetch calendar data
+                };
+                xhr.send('code=' + response.code);
+            },
+        });
+
+        // Trigger the authentication flow
+        document.getElementById('apiCallButton').addEventListener('click', function() {
+            client.requestCode();
+        });
+    }
+
+    // Load the Google auth library and initialize authentication
+    function loadGoogleAuth() {
+        google.load('client:auth2', initGoogleAuth);
+    }
+
+    loadGoogleAuth();
+</script>
 <!-- Placeholder for Canvas login -->
 <div id="canvas-login">
     <h3>Canvas Login</h3>
