@@ -20,10 +20,22 @@
 
 <!-- Placeholder for Google Calendar -->
 <div id="calendar">
-    <h3>Google Calendar</h3>
-    <!-- Embed Google Calendar here -->
-    <!-- You'll need to replace 'src' with your actual Google Calendar embed link -->
-    <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    const client = google.accounts.oauth2.initCodeClient({
+  client_id: 'YOUR_GOOGLE_CLIENT_ID',
+  scope: 'https://www.googleapis.com/auth/calendar.readonly',
+  ux_mode: 'popup',
+  callback: (response) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', code_receiver_uri, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // Set custom header for CRSF
+    xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+    xhr.onload = function() {
+      console.log('Auth code response: ' + xhr.responseText);
+    };
+    xhr.send('code=' + response.code);
+  },
+});
 </div>
 
 <!-- Placeholder for Canvas login -->
